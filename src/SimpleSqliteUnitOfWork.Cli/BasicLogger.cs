@@ -1,6 +1,6 @@
 using System;
 
-namespace Temp.CLI;
+namespace SimpleSqliteUnitOfWork.Cli;
 
 public class BasicLogger
 {

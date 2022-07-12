@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3DADA77E-BEBE-46D3-9791-8023B8FDBB53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Temp.CLI", "src\Temp.CLI\Temp.CLI.csproj", "{59CB3AAE-E1F0-4647-90D8-9F88A88C9DF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSqliteUnitOfWork.Cli", "src\SimpleSqliteUnitOfWork.Cli\SimpleSqliteUnitOfWork.Cli.csproj", "{59CB3AAE-E1F0-4647-90D8-9F88A88C9DF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

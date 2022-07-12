@@ -1,6 +1,6 @@
 using System;
 
-namespace Temp.CLI.Data.Entities;
+namespace SimpleSqliteUnitOfWork.Cli.Data.Entities;
 
 public class Person
 {

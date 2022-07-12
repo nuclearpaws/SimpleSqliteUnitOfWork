@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.Json;
-using Temp.CLI;
-using Temp.CLI.Data;
-using Temp.CLI.Data.Entities;
+using SimpleSqliteUnitOfWork.Cli;
+using SimpleSqliteUnitOfWork.Cli.Data;
+using SimpleSqliteUnitOfWork.Cli.Data.Entities;
 
 var dbFilePath = "./mydb.db";
 
@@ -11,7 +11,7 @@ using var uow = new UnitOfWork(dbFilePath, basicLogger);
 
 var people = uow.Person.GetAll();
 
-foreach(var person in people)
+foreach (var person in people)
 {
     System.Console.WriteLine(person.ToJson());
 }

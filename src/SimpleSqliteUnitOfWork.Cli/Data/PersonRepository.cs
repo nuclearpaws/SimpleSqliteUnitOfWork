@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using Temp.CLI.Data.Entities;
+using SimpleSqliteUnitOfWork.Cli.Data.Entities;
 
-namespace Temp.CLI.Data;
+namespace SimpleSqliteUnitOfWork.Cli.Data;
 
 public class PersonRepository
     : Repository<Person>
@@ -35,7 +35,7 @@ public class PersonRepository
             _logger.Log("Added entity OK!");
             return true;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.Log($"Something broke: {ex.Message}");
             return false;
@@ -58,7 +58,7 @@ public class PersonRepository
 
         using var reader = command.ExecuteReader();
         var persons = new List<Person>();
-        while(reader.Read())
+        while (reader.Read())
         {
             var person = new Person
             {
@@ -84,7 +84,7 @@ public class PersonRepository
 
         using var reader = command.ExecuteReader();
         var person = default(Person);
-        if(reader.Read())
+        if (reader.Read())
         {
             person = new Person
             {
@@ -118,7 +118,7 @@ public class PersonRepository
             _logger.Log("Added entity OK!");
             return true;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _logger.Log($"Something broke: {ex.Message}");
             return false;

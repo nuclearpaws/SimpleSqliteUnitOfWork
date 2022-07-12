@@ -1,7 +1,7 @@
 using System;
 using System.Data.SQLite;
 
-namespace Temp.CLI.Data;
+namespace SimpleSqliteUnitOfWork.Cli.Data;
 
 public class UnitOfWork
     : IDisposable
@@ -35,7 +35,7 @@ public class UnitOfWork
 
     public void Dispose()
     {
-        if(IsDisposed)
+        if (IsDisposed)
             return;
 
         IsDisposed = true;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Temp.CLI.Data;
+namespace SimpleSqliteUnitOfWork.Cli.Data;
 
 public abstract class Repository<TEntity>
 {
