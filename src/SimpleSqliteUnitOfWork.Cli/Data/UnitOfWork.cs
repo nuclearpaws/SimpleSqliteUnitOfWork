@@ -28,19 +28,20 @@ public class UnitOfWork
         Person = new PersonRepository(_transaction, basicLogger);
     }
 
-    public void SaveChanges()
-    {
-        _transaction.Commit();
-    }
-
-    public void Dispose()
+    public virtual void Dispose()
     {
         if (IsDisposed)
             return;
 
         IsDisposed = true;
 
+        Person.Dispose();
         _dbConnection.Close();
         _dbConnection.Dispose();
+    }
+
+    public void SaveChanges()
+    {
+        _transaction.Commit();
     }
 }

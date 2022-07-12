@@ -9,12 +9,13 @@ namespace SimpleSqliteUnitOfWork.Cli.Data;
 public class PersonRepository
     : Repository<Person>
 {
-    private readonly SQLiteTransaction _transaction;
     private readonly BasicLogger _logger;
 
-    public PersonRepository(SQLiteTransaction transaction, BasicLogger logger)
+    public PersonRepository(
+        SQLiteTransaction transaction,
+        BasicLogger logger)
+        : base(transaction)
     {
-        _transaction = transaction;
         _logger = logger;
     }
 
