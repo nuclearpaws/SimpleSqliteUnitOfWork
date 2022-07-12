@@ -9,13 +9,7 @@ var dbFilePath = "./mydb.db";
 var basicLogger = new BasicLogger();
 using var uow = new UnitOfWork(dbFilePath, basicLogger);
 
-var people = uow.Person.GetAll();
-
-foreach (var person in people)
-{
-    System.Console.WriteLine(person.ToJson());
-}
-
+uow.Person.DeleteById(1);
 uow.SaveChanges();
 
 public static class Extensions

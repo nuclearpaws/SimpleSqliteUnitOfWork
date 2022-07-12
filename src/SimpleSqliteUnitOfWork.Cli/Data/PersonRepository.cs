@@ -44,7 +44,23 @@ public class PersonRepository
 
     public override bool DeleteById(int id)
     {
-        throw new System.NotImplementedException();
+        using var command = new SQLiteCommand();
+        command.Transaction = _transaction;
+        command.CommandType = CommandType.Text;
+        command.CommandText = @$"
+            DELETE FROM Person WHERE PersonId = {id} LIMIT 1
+        ";
+        try
+        {
+            command.ExecuteNonQuery();
+            _logger.Log("Deleted entity OK!");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.Log($"Something broke: {ex.Message}");
+            return false;
+        }
     }
 
     public override IEnumerable<Person> GetAll()
