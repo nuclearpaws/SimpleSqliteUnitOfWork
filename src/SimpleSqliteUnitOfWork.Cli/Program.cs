@@ -9,7 +9,15 @@ var dbFilePath = "./mydb.db";
 var basicLogger = new BasicLogger();
 using var uow = new UnitOfWork(dbFilePath, basicLogger);
 
-uow.Person.DeleteById(1);
+var newPerson = new Person
+{
+    FirstName = "Testing",
+    LastName = "Insertion",
+    DateOfBirth = new DateTime(1990, 01, 01),
+};
+
+var newPersonId = uow.Person.Add(newPerson);
+
 uow.SaveChanges();
 
 public static class Extensions

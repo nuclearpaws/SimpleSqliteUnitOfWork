@@ -19,7 +19,7 @@ public class PersonRepository
         _logger = logger;
     }
 
-    public override bool Add(Person entity)
+    public override int Add(Person entity)
     {
         using var command = new SQLiteCommand();
         command.Transaction = _transaction;
@@ -33,13 +33,14 @@ public class PersonRepository
         try
         {
             command.ExecuteNonQuery();
-            _logger.Log("Added entity OK!");
-            return true;
+            var id = GetLastInsertRowId();
+            _logger.Log($"Added entity '{id}' OK!");
+            return id;
         }
         catch (Exception ex)
         {
             _logger.Log($"Something broke: {ex.Message}");
-            return false;
+            return default;
         }
     }
 
@@ -156,5 +157,12 @@ public class PersonRepository
             _logger.Log($"Something broke: {ex.Message}");
             return false;
         }
+    }
+
+    protected override int SafeConvertObjectToTId(object value)
+    {
+        var id64 = (Int64)value;
+        var id32 = (int)id64;
+        return id32;
     }
 }
