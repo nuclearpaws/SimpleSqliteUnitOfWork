@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using SimpleSqliteUnitOfWork.Cli.Data.Entities;
 
 namespace SimpleSqliteUnitOfWork.Cli.Data;
 
-public abstract class Repository<TEntity>
+public abstract class Repository<TEntity, TId>
     : IDisposable
+    where TEntity : IEntity<TId>
 {
     protected readonly SQLiteTransaction _transaction;
 
@@ -29,8 +31,8 @@ public abstract class Repository<TEntity>
     }
 
     public abstract IEnumerable<TEntity> GetAll();
-    public abstract TEntity GetById(int id);
+    public abstract TEntity GetById(TId id);
     public abstract bool Add(TEntity entity);
-    public abstract bool Update(int id, TEntity entity);
-    public abstract bool DeleteById(int id);
+    public abstract bool Update(TId id, TEntity entity);
+    public abstract bool DeleteById(TId id);
 }

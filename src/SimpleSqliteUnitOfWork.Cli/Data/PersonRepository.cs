@@ -7,7 +7,7 @@ using SimpleSqliteUnitOfWork.Cli.Data.Entities;
 namespace SimpleSqliteUnitOfWork.Cli.Data;
 
 public class PersonRepository
-    : Repository<Person>
+    : Repository<Person, int>
 {
     private readonly BasicLogger _logger;
 
@@ -81,7 +81,7 @@ public class PersonRepository
             {
                 var person = new Person
                 {
-                    PersonId = reader.GetInt32(0),
+                    Id = reader.GetInt32(0),
                     FirstName = reader.GetString(1),
                     LastName = reader.GetString(2),
                     DateOfBirth = reader.GetDateTime(3),
@@ -115,7 +115,7 @@ public class PersonRepository
             {
                 person = new Person
                 {
-                    PersonId = reader.GetInt32(0),
+                    Id = reader.GetInt32(0),
                     FirstName = reader.GetString(1),
                     LastName = reader.GetString(2),
                     DateOfBirth = reader.GetDateTime(3),
@@ -143,7 +143,7 @@ public class PersonRepository
                 LastName = '{entity.LastName}',
                 DateOfBirth = '{entity.DateOfBirth:yyyy-MM-ddTHH:mm:ss.fff}'
             WHERE
-                PersonId = {entity.PersonId}
+                PersonId = {entity.Id}
         ";
         try
         {
