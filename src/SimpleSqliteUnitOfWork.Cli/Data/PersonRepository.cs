@@ -56,21 +56,29 @@ public class PersonRepository
             SELECT * FROM Person
         ";
 
-        using var reader = command.ExecuteReader();
-        var persons = new List<Person>();
-        while (reader.Read())
+        try
         {
-            var person = new Person
+            using var reader = command.ExecuteReader();
+            var persons = new List<Person>();
+            while (reader.Read())
             {
-                PersonId = reader.GetInt32(0),
-                FirstName = reader.GetString(1),
-                LastName = reader.GetString(2),
-                DateOfBirth = reader.GetDateTime(3),
-            };
-            persons.Add(person);
+                var person = new Person
+                {
+                    PersonId = reader.GetInt32(0),
+                    FirstName = reader.GetString(1),
+                    LastName = reader.GetString(2),
+                    DateOfBirth = reader.GetDateTime(3),
+                };
+                persons.Add(person);
+            }
+            _logger.Log("Got entities OK!");
+            return persons;
         }
-
-        return persons;
+        catch (Exception ex)
+        {
+            _logger.Log($"Something broke: {ex.Message}");
+            return null;
+        }
     }
 
     public override Person GetById(int id)
@@ -82,20 +90,28 @@ public class PersonRepository
             SELECT * FROM Person WHERE PersonId = {id} LIMIT 1
         ";
 
-        using var reader = command.ExecuteReader();
-        var person = default(Person);
-        if (reader.Read())
+        try
         {
-            person = new Person
+            using var reader = command.ExecuteReader();
+            var person = default(Person);
+            if (reader.Read())
             {
-                PersonId = reader.GetInt32(0),
-                FirstName = reader.GetString(1),
-                LastName = reader.GetString(2),
-                DateOfBirth = reader.GetDateTime(3),
-            };
+                person = new Person
+                {
+                    PersonId = reader.GetInt32(0),
+                    FirstName = reader.GetString(1),
+                    LastName = reader.GetString(2),
+                    DateOfBirth = reader.GetDateTime(3),
+                };
+            }
+            _logger.Log("Got entity OK!");
+            return person;
         }
-
-        return person;
+        catch (Exception ex)
+        {
+            _logger.Log($"Something broke: {ex.Message}");
+            return null;
+        }
     }
 
     public override bool Update(int id, Person entity)
